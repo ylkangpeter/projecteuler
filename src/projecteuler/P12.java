@@ -3,12 +3,16 @@ package projecteuler;
 public class P12 {
 
 	public static void main(String[] args) {
+
+	}
+
+	private static void bruteforce() {
 		int totalDiv = 500;
 		long tNumber = 0;
 		for (int i = 1;; i++) {
 			tNumber += i;
 			int counter = 0;
-			for (long j = 1; j < tNumber / 2 + 1; j++) {
+			for (long j = 1; j <= tNumber / 2 + 1; j++) {
 				if (tNumber % j == 0) {
 					counter++;
 				}
@@ -19,7 +23,10 @@ public class P12 {
 				break;
 			}
 		}
-
 	}
 
+	private static void better() {
+		// use prime number
+		// prime1^a*prime2^b*...primen^m = (a+1)*(b+1)*...*(m+1)
+	}
 }
