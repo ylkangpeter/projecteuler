@@ -13,10 +13,9 @@ public class P49 {
 
 	public static void main(String[] args) {
 
-		Set<Integer> primeSet = Util.genPrimeNumberBelow(9999);
-		for (Iterator<Integer> iterator = primeSet.iterator(); iterator
-				.hasNext();) {
-			Integer val = (Integer) iterator.next();
+		Set<Long> primeSet = Util.genPrimeNumberBelow(9999);
+		for (Iterator<Long> iterator = primeSet.iterator(); iterator.hasNext();) {
+			Long val = (Long) iterator.next();
 			if (val < 1000) {
 				iterator.remove();
 			}

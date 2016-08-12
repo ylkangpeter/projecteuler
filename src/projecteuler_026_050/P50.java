@@ -10,16 +10,16 @@ import util.Util;
 public class P50 {
 
 	public static void main(String[] args) {
-		Set<Integer> primeSet = Util.genPrimeNumberBelow(1000000);
-		List<Integer> list = new ArrayList<Integer>();
+		Set<Long> primeSet = Util.genPrimeNumberBelow(1000000);
+		List<Long> list = new ArrayList<Long>();
 		list.addAll(primeSet);
 		Collections.sort(list);
 		int maxLen = 1;
-		int maxTotal = 0;
+		long maxTotal = 0;
 		for (int i = 0; i < list.size(); i++) {
 			int len = 1;
-			int total = list.get(i);
-			int value = 0;
+			long total = list.get(i);
+			long value = 0;
 			for (int j = i + 1; j < list.size() && total < 1000000; j++) {
 				total += list.get(j);
 				if (primeSet.contains(total)) {

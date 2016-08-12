@@ -3,7 +3,7 @@ package projecteuler_026_050;
 import java.util.HashSet;
 import java.util.Set;
 
-import projecteuler_001_025.P24_permutation;
+import util.Util;
 
 public class P32 {
 
@@ -28,7 +28,7 @@ public class P32 {
 				if (a * b == c) {
 					set.add(c);
 				}
-				P24_permutation.genNext(arr);
+				Util.genNextPerm(arr);
 			} catch (Exception e) {
 				e.printStackTrace();
 				break;

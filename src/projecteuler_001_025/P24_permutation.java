@@ -1,5 +1,7 @@
 package projecteuler_001_025;
 
+import util.Util;
+
 /**
  * 
  * 01432
@@ -32,7 +34,7 @@ public class P24_permutation {
 
 		int[] init = { 2, 0, 1, 3, 4, 5, 6, 7, 8, 9 };
 		for (int i = total + 1; i < 1000000; i++) {
-			genNext(init);
+			Util.genNextPerm(init);
 		}
 		for (int i = 0; i < init.length; i++) {
 			System.out.print(init[i]);
@@ -40,39 +42,4 @@ public class P24_permutation {
 
 	}
 
-	public static void genNext(int[] arr) throws Exception {
-		int marker = arr.length - 1;
-		boolean isChange = false;
-		for (; marker > 0; marker--) {
-			if (arr[marker] > arr[marker - 1]) {
-				isChange = true;
-				break;
-			}
-		}
-		if (!isChange) {
-			throw new Exception("no more");
-		}
-		marker--;
-		int minInx = marker + 1;
-		for (int i = marker + 1; i < arr.length; i++) {
-			if (arr[i] > arr[marker]) {
-				minInx = (arr[minInx] > arr[i] ? i : minInx);
-			}
-		}
-		int tmp = arr[marker];
-		arr[marker] = arr[minInx];
-		arr[minInx] = tmp;
-		swap(arr, marker + 1, arr.length - 1);
-	}
-
-	private static void swap(int[] arr, int start, int end) {
-		if (start == end)
-			return;
-		for (int i = 0; i <= (end - start + 1) / 2 && start + i < end - i; i++) {
-			int tmp = arr[start + i];
-			arr[start + i] = arr[end - i];
-			arr[end - i] = tmp;
-		}
-
-	}
 }

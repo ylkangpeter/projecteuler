@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import projecteuler_001_025.P22;
-
 public class P42 {
 	private static final Set<Integer> triangleNumSet = new HashSet<Integer>();
 

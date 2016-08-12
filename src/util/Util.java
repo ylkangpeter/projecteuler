@@ -1,12 +1,34 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-public class Util {
+public class 136 {
+
+	public static Map<Integer, Integer> getPrimeFactors(long num) {
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		long rest = num;
+		while (rest != 1) {
+			for (int i = 2; i <= rest; i++) {
+				if (rest % i == 0) {
+					Integer count = map.get(i);
+					if (count == null) {
+						count = 0;
+					}
+					count++;
+					map.put(i, count);
+					rest /= i;
+					break;
+				}
+			}
+		}
+		return map;
+	}
 
 	public static List<Integer> add(List<Integer> value, List<Integer> addUp) {
 
@@ -45,14 +67,8 @@ public class Util {
 	}
 
 	public static void main(String[] args) {
-		List<Integer> l = new ArrayList<Integer>();
-		l.add(1);
-		l.add(2);
-		l.add(3);
-		l.add(4);
-		Set<List<Integer>> ll = genPermutation(l);
-
-		System.out.println(ll);
+		getPrimeFactors(644);
+		System.out.println();
 	}
 
 	public static List<Integer> multi(List<Integer> val1, List<Integer> val2) {
@@ -112,6 +128,42 @@ public class Util {
 		return true;
 	}
 
+	public static void genNextPerm(int[] arr) throws Exception {
+		int marker = arr.length - 1;
+		boolean isChange = false;
+		for (; marker > 0; marker--) {
+			if (arr[marker] > arr[marker - 1]) {
+				isChange = true;
+				break;
+			}
+		}
+		if (!isChange) {
+			throw new Exception("no more");
+		}
+		marker--;
+		int minInx = marker + 1;
+		for (int i = marker + 1; i < arr.length; i++) {
+			if (arr[i] > arr[marker]) {
+				minInx = (arr[minInx] > arr[i] ? i : minInx);
+			}
+		}
+		int tmp = arr[marker];
+		arr[marker] = arr[minInx];
+		arr[minInx] = tmp;
+		swap(arr, marker + 1, arr.length - 1);
+	}
+
+	private static void swap(int[] arr, int start, int end) {
+		if (start == end)
+			return;
+		for (int i = 0; i <= (end - start + 1) / 2 && start + i < end - i; i++) {
+			int tmp = arr[start + i];
+			arr[start + i] = arr[end - i];
+			arr[end - i] = tmp;
+		}
+
+	}
+
 	public static int[] genPrimeNumber(int len) {
 		int[] result = new int[len];
 		int counter = 0;
@@ -133,12 +185,12 @@ public class Util {
 		return result;
 	}
 
-	public static Set<Integer> genPrimeNumberBelow(int max) {
-		Set<Integer> set = new HashSet<Integer>();
-		int number = 2;
+	public static Set<Long> genPrimeNumberBelow(long max) {
+		Set<Long> set = new HashSet<Long>();
+		long number = 2;
 		while (number < max) {
 			boolean isPrime = true;
-			for (int j = 2; j < (long) Math.sqrt(number) + 1; j++) {
+			for (long j = 2; j < (long) Math.sqrt(number) + 1; j++) {
 				if (number % j == 0) {
 					isPrime = false;
 					break;
@@ -240,6 +292,14 @@ public class Util {
 		perm(0, raw.size() - 1, raw, tmp);
 		return tmp;
 
+	}
+
+	public static long getNormalFormInt(int[] arr) {
+		long val = 0;
+		for (int i = 0; i < arr.length; i++) {
+			val += Math.pow(10, arr.length - 1 - i) * arr[i];
+		}
+		return val;
 	}
 
 	public static int getNormalFormInt(List<Integer> list) {
